@@ -1,0 +1,1911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JFA Lucky Palace - Premium Wedding Venue | Othakadai, Madurai</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #d4af37;
+            --accent: #8b4513;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --white: #ffffff;
+            --cream: #faf8f5;
+            --gold: #ffd700;
+            --shadow: 0 8px 25px rgba(0,0,0,0.1);
+            --shadow-light: 0 4px 15px rgba(0,0,0,0.08);
+            --shadow-dark: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--cream);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        .header {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: var(--white);
+    }
+
+    .header-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+        filter: brightness(0.7);
+    }
+
+    .header-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 1;
+    }
+
+    /* Navigation Menu Styles */
+    .nav-menu {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        z-index: 1000;
+    }
+
+    .nav-icon {
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 10px;
+    }
+
+    .dot {
+        width: 6px;
+        height: 6px;
+        background-color: var(--gold);
+        border-radius: 50%;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        right: 0;
+        background: rgba(0, 0, 0, 0.9);
+        border-radius: 10px;
+        padding: 15px;
+        min-width: 150px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--gold);
+    }
+
+    .nav-links a {
+        display: block;
+        color: white;
+        padding: 10px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover {
+        color: var(--gold);
+        transform: translateX(5px);
+    }
+
+    .nav-links.active {
+        display: block;
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Existing Header Content Styles */
+    .logo {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--gold);
+        z-index: 10;
+    }
+
+    .header-content {
+        max-width: 800px;
+        z-index: 5;
+        position: relative;
+        padding: 0 20px;
+    }
+
+    .btn {
+        display: inline-block;
+        background: linear-gradient(135deg, var(--gold), var(--secondary));
+        color: var(--primary);
+        padding: 18px 40px;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border: 2px solid transparent;
+    }
+
+    .btn:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4);
+        border-color: var(--gold);
+    }
+
+ 
+
+        /* Loading Screen */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .loading.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Header Styles */
+        .header {
+            position: relative;
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), 
+                        url('https://i.postimg.cc/zfgv675B/marhands.jpg') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.3) 100%);
+            z-index: 1;
+        }
+
+        .logo {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            z-index: 10;
+            font-family: 'Playfair Display', serif;
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        @keyframes fadeInLeft {
+            from { 
+                opacity: 0; 
+                transform: translateX(-50px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(0); 
+            }
+        }
+
+        .header-content {
+            max-width: 800px;
+            z-index: 5;
+            position: relative;
+            animation: fadeInUp 1.5s ease-out;
+            padding: 0 20px;
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(60px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .header-content h1 {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.8);
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--white);
+            line-height: 1.2;
+        }
+
+        .header-content p {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.95);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold), var(--secondary));
+            color: var(--dark);
+            padding: 18px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid transparent;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4);
+            border-color: var(--gold);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+            font-size: 3rem;
+            color: var(--primary);
+            position: relative;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary), var(--gold));
+            margin: 25px auto;
+            border-radius: 2px;
+        }
+
+        /* Scroll Animation Classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease-out;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 1s ease-out;
+        }
+
+        .animate-left.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animate-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 1s ease-out;
+        }
+
+        .animate-right.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animate-scale {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 1s ease-out;
+        }
+
+        .animate-scale.animated {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* About Section */
+        .about {
+            background: var(--white);
+            position: relative;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--cream), transparent);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: var(--primary);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .about-text p {
+            margin-bottom: 25px;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .about-image {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-dark);
+            position: relative;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(212, 175, 55, 0.1), transparent);
+            z-index: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .about-image:hover::before {
+            opacity: 0;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Gallery Section - COMPLETELY REDESIGNED */
+        .gallery-section {
+            background: linear-gradient(135deg, #0f1419, #1a1f29);
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .gallery-section .section-title {
+            color: var(--gold);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 80px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .gallery-section .section-title::after {
+            background: linear-gradient(90deg, var(--gold), #fff);
+        }
+
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 25px;
+            box-shadow: 
+                0 25px 60px rgba(0,0,0,0.4),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+            background: linear-gradient(135deg, #1e2329, #2a2f3a);
+        }
+
+        .gallery-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .gallery-track {
+            display: flex;
+            width: fit-content;
+            height: 100%;
+            animation: infiniteScroll 40s linear infinite;
+            will-change: transform;
+        }
+
+        .gallery-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes infiniteScroll {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        .gallery-item {
+            position: relative;
+            width: 400px;
+            height: 100%;
+            margin-right: 30px;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            background: linear-gradient(135deg, #2a2f3a, #1e2329);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-20px) scale(1.05);
+            z-index: 10;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(212, 175, 55, 0.2) 0%,
+                transparent 50%,
+                rgba(255, 215, 0, 0.1) 100%
+            );
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 2;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            filter: brightness(0.8) contrast(1.1);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+            filter: brightness(1) contrast(1.2);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 25px;
+            background: linear-gradient(
+                to top,
+                rgba(0,0,0,0.9) 0%,
+                rgba(0,0,0,0.7) 50%,
+                transparent 100%
+            );
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: 3;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        .gallery-caption h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--gold);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+
+        .gallery-caption p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        /* Gallery Navigation Buttons */
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(212, 175, 55, 0.9);
+            border: none;
+            border-radius: 50%;
+            color: var(--dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: 20;
+            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 8px 25px rgba(0,0,0,0.3),
+                0 0 0 1px rgba(255,255,255,0.1);
+        }
+
+        .gallery-nav:hover {
+            background: var(--gold);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 
+                0 12px 35px rgba(212, 175, 55, 0.4),
+                0 0 0 1px rgba(255,255,255,0.2);
+        }
+
+        .gallery-nav.prev {
+            left: 30px;
+        }
+
+        .gallery-nav.next {
+            right: 30px;
+        }
+
+        .gallery-nav:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        /* Gallery Indicators */
+        .gallery-indicators {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 20;
+        }
+
+        .gallery-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .gallery-indicator.active,
+.gallery-indicator:hover {
+            background: var(--gold);
+            transform: scale(1.2);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        /* Modal Styles - Enhanced */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            position: relative;
+            margin: 5% auto;
+            width: 90%;
+            max-width: 900px;
+            max-height: 80vh;
+            border-radius: 20px;
+            overflow: hidden;
+            animation: modalSlideIn 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+        }
+
+        @keyframes modalSlideIn {
+            from { 
+                transform: scale(0.8) translateY(60px);
+                opacity: 0;
+            }
+            to { 
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .modal-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            color: white;
+            text-align: center;
+        }
+
+        .modal-caption h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--gold);
+        }
+
+        .close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .close:hover {
+            color: var(--gold);
+            transform: scale(1.1) rotate(90deg);
+            background: rgba(212, 175, 55, 0.2);
+        }
+
+        /* Amenities Section */
+        .amenities {
+            background: var(--primary);
+            color: white;
+            position: relative;
+        }
+
+        .amenities::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="rgba(212,175,55,0.1)"/></svg>');
+            background-size: 50px 50px;
+        }
+
+        .amenities .section-title {
+            color: var(--gold);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        .amenities .section-title::after {
+            background: linear-gradient(90deg, var(--gold), var(--secondary));
+        }
+
+        .amenities-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .amenity-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-dark);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .amenity-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212,175,55,0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .amenity-card:hover::before {
+            left: 100%;
+        }
+
+        .amenity-card:hover {
+            transform: translateY(-15px);
+            background: rgba(255,255,255,0.15);
+            border-color: var(--gold);
+        }
+
+        .amenity-card h3 {
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            color: var(--gold);
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .amenity-card ul {
+            list-style: none;
+        }
+
+        .amenity-card li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 30px;
+            transition: all 0.3s ease;
+            font-size: 1.05rem;
+        }
+
+        .amenity-card li:hover {
+            transform: translateX(10px);
+            color: var(--gold);
+        }
+
+        .amenity-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            background: var(--light);
+            text-align: center;
+        }
+
+        .price-box {
+            background: var(--white);
+            padding: 60px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-dark);
+            max-width: 600px;
+            margin: 0 auto;
+            border: 3px solid var(--gold);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .price-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(212,175,55,0.1), transparent);
+            animation: priceShine 3s ease-in-out infinite;
+        }
+
+        @keyframes priceShine {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .price-box h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .price-amount {
+            font-size: 4rem;
+            font-weight: 700;
+            margin: 30px 0;
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            z-index: 1;
+        }
+
+        .price-period {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: #666;
+            position: relative;
+            z-index: 1;
+        }
+
+        .rating {
+            color: var(--gold);
+            font-size: 1.4rem;
+            margin: 25px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .rating span {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-left: 10px;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--white);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            padding: 25px;
+            background: var(--light);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--gold);
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-icon {
+            background: linear-gradient(135deg, var(--gold), var(--secondary));
+            color: var(--dark);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            box-shadow: var(--shadow-light);
+            flex-shrink: 0;
+        }
+
+        .contact-item h3 {
+            margin-bottom: 8px;
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+
+        .contact-item p {
+            color: #666;
+            font-size: 1.05rem;
+        }
+
+        .map-container {
+            height: 450px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-dark);
+            position: relative;
+        }
+
+        .map-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(212,175,55,0.1), transparent);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(20%);
+            transition: filter 0.3s ease;
+        }
+
+        .map-container:hover iframe {
+            filter: grayscale(0%);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="rgba(212,175,55,0.1)"/></svg>');
+            background-size: 100px 100px;
+        }
+
+        footer h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--gold);
+            position: relative;
+            z-index: 1;
+        }
+
+        footer p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 30px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .social-links a:hover {
+            color: var(--gold);
+            transform: translateY(-8px) scale(1.1);
+            background: rgba(212, 175, 55, 0.2);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .gallery-container {
+                height: 350px;
+            }
+            
+            .gallery-item {
+                width: 280px;
+            }
+            
+            .amenities-container {
+                grid-template-columns: 1fr;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+
+            .price-box {
+                padding: 40px 30px;
+            }
+
+            .close {
+                right: 20px;
+                font-size: 30px;
+                width: 40px;
+                height: 40px;
+            }
+
+            .gallery-nav {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .gallery-nav.prev {
+                left: 15px;
+            }
+
+            .gallery-nav.next {
+                right: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-item {
+                width: 250px;
+            }
+            
+            .gallery-container {
+                height: 300px;
+                border-radius: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage">
+            <div id="modalCaption" class="modal-caption">
+                <h3></h3>
+                <p></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header/Hero Section -->
+   <header class="header">
+    <!-- Navigation Menu (3-dot icon) -->
+    <div class="nav-menu">
+        <div class="nav-icon" onclick="toggleNav()">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="JFA_Lucky_Palace.html">Home</a>
+            <a href="details.html">Details</a>
+            <a href="events.html">Events</a>
+            <a href="packages.html">Packages</a>
+        </div>
+    </div>
+
+    <!-- Background Video -->
+    <video autoplay muted loop playsinline class="header-video">
+        <source src="1000007175.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <!-- Overlay for better text visibility -->
+    <div class="header-overlay"></div>
+    
+    <!-- Logo and Content -->
+    <div class="logo">JFA Lucky Palace</div>
+    <div class="header-content">
+        <h1>Your Perfect Wedding Destination</h1>
+        <p>15,000 sq.ft of luxury and elegance in the heart of Madurai</p>
+        <a href="javascript:void(0);" onclick="openWhatsApp()" class="btn">Book Your Dream Wedding</a>
+    </div>
+</header>
+
+
+    <!-- About Section -->
+    <section class="about section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">About Our Palace</h2>
+            <div class="about-content">
+                <div class="about-text animate-left">
+                    <h3>Premium Wedding Venue in Othakadai</h3>
+                    <p>JFA Lucky Palace is a magnificent wedding venue that combines traditional elegance with modern luxury. Our 15,000 square feet of beautifully designed space provides the perfect backdrop for your special day.</p>
+                    <p>With 13 AC rooms, ample parking, and state-of-the-art facilities, we ensure your guests enjoy every moment of your celebration in complete comfort.</p>
+                    <p>Our dedicated team of professionals works tirelessly to transform your wedding dreams into reality, creating magical moments that will be cherished forever.</p>
+                </div>
+                <div class="about-image animate-right">
+                    <img src="https://i.postimg.cc/DzQ3MvBS/Book-now-a-palace-for-your-wedding-JFA-LUCKY-PALACE-Uthangudi-Madurai-Book-now-91-90097-50000.jpg" alt="JFA Lucky Palace Exterior">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Our Beautiful Gallery</h2>
+            <div class="gallery-container animate-scale">
+                <button class="gallery-nav prev" onclick="previousSlide()">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="gallery-nav next" onclick="nextSlide()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                
+                <div class="gallery-wrapper">
+                    <div class="gallery-track" id="galleryTrack">
+                        <!-- Original Set -->
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <img src="https://i.postimg.cc/c13yKmLN/Book-now-a-palace-for-your-wedding-JFA-LUCKY-PALACE-Uthangudi-Madurai-Book-now-91-90097-50000-2.jpg" alt="Hall Sections">
+                            <div class="gallery-caption">
+                                <h3>Elegant Hall Sections</h3>
+                                <p>Spacious and beautifully designed hall sections for your special celebrations</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <img src="https://i.postimg.cc/BQZpWSyw/Book-now-a-palace-for-your-wedding-JFA-LUCKY-PALACE-Uthangudi-Madurai-Book-now-91-90097-50000-3.jpg" alt="Grand Entrance Lift">
+                            <div class="gallery-caption">
+                                <h3>Grand Entrance with Lift</h3>
+                                <p>Impressive entrance featuring modern lift access for your convenience</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <img src="https://i.postimg.cc/ZKGKXRsr/Book-now-a-palace-for-your-wedding-JFA-LUCKY-PALACE-Uthangudi-Madurai-Book-now-91-90097-50000-4.jpg" alt="Floral Mandap">
+                            <div class="gallery-caption">
+                                <h3>Exquisite Floral Mandap</h3>
+                                <p>Traditional mandap with stunning floral arrangements for your sacred ceremonies</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <img src="https://i.postimg.cc/NfRTFWXv/Book-now-a-palace-for-your-wedding-JFA-LUCKY-PALACE-Uthangudi-Madurai-Book-now-91-90097-50000-5.jpg" alt="Grand Wedding Hall">
+                            <div class="gallery-caption">
+                                <h3>Grand Wedding Hall</h3>
+                                <p>Our magnificent main hall featuring luxury amenities and elegant décor</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <img src="https://i.postimg.cc/cChZn0G6/Book-now-a-palace-for-your-wedding-JFA-LUCKY-PALACE-Uthangudi-Madurai-Book-now-91-90097-50000-6.jpg" alt="Palace Exterior">
+                            <div class="gallery-caption">
+                                <h3>Stunning Palace Exterior</h3>
+                                <p>Beautiful architectural design that creates a perfect wedding venue ambiance</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <img src="https://i.postimg.cc/BvBFtPw0/Start-your-love-from-here-BOOKINGS-OPEN-JFA-LUCKY-PALACE-MADURAI.jpg" alt="Luxury Dining Hall">
+                            <div class="gallery-caption">
+                                <h3>Premium Dining Hall</h3>
+                                <p>Sophisticated dining area with capacity for 240 guests</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <img src="https://i.postimg.cc/TPQPZzPV/Start-your-love-from-here-BOOKINGS-OPEN-JFA-LUCKY-PALACE-MADURAI-2.jpg" alt="Crystal Chandelier">
+                            <div class="gallery-caption">
+                                <h3>Crystal Chandelier View</h3>
+                                <p>Magnificent crystal chandeliers adding elegance to your celebration</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <img src="https://i.postimg.cc/3Nc2ZbXw/chair.jpg" alt="Elegant Seating">
+                            <div class="gallery-caption">
+                                <h3>Elegant Seating Arrangement</h3>
+                                <p>Comfortable and stylish seating for your guests</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <img src="https://i.postimg.cc/NjhgygVG/hall1.avif" alt="Luxury Lobby">
+                            <div class="gallery-caption">
+                                <h3>Luxury Reception Lobby</h3>
+                                <p>Opulent lobby area for welcoming your guests</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <img src="https://i.postimg.cc/d0TY9gyQ/Start-your-love-from-here-BOOKINGS-OPEN-JFA-LUCKY-PALACE-MADURAI-1.jpg" alt="Golden Furniture">
+                            <div class="gallery-caption">
+                                <h3>Premium Golden Furniture</h3>
+                                <p>Luxurious golden furniture sets creating a royal atmosphere</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Duplicated Set for Seamless Loop -->
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <img src="https://i.postimg.cc/c13yKmLN/Book-now-a-palace-for-your-wedding-JFA-LUCKY-PALACE-Uthangudi-Madurai-Book-now-91-90097-50000-2.jpg" alt="Hall Sections">
+                            <div class="gallery-caption">
+                                <h3>Elegant Hall Sections</h3>
+                                <p>Spacious and beautifully designed hall sections for your special celebrations</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <img src="https://i.postimg.cc/BQZpWSyw/Book-now-a-palace-for-your-wedding-JFA-LUCKY-PALACE-Uthangudi-Madurai-Book-now-91-90097-50000-3.jpg" alt="Grand Entrance Lift">
+                            <div class="gallery-caption">
+                                <h3>Grand Entrance with Lift</h3>
+                                <p>Impressive entrance featuring modern lift access for your convenience</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <img src="https://i.postimg.cc/ZKGKXRsr/Book-now-a-palace-for-your-wedding-JFA-LUCKY-PALACE-Uthangudi-Madurai-Book-now-91-90097-50000-4.jpg" alt="Floral Mandap">
+                            <div class="gallery-caption">
+                                <h3>Exquisite Floral Mandap</h3>
+                                <p>Traditional mandap with stunning floral arrangements for your sacred ceremonies</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <img src="https://i.postimg.cc/NfRTFWXv/Book-now-a-palace-for-your-wedding-JFA-LUCKY-PALACE-Uthangudi-Madurai-Book-now-91-90097-50000-5.jpg" alt="Grand Wedding Hall">
+                            <div class="gallery-caption">
+                                <h3>Grand Wedding Hall</h3>
+                                <p>Our magnificent main hall featuring luxury amenities and elegant décor</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <img src="https://i.postimg.cc/cChZn0G6/Book-now-a-palace-for-your-wedding-JFA-LUCKY-PALACE-Uthangudi-Madurai-Book-now-91-90097-50000-6.jpg" alt="Palace Exterior">
+                            <div class="gallery-caption">
+                                <h3>Stunning Palace Exterior</h3>
+                                <p>Beautiful architectural design that creates a perfect wedding venue ambiance</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <img src="https://i.postimg.cc/BvBFtPw0/Start-your-love-from-here-BOOKINGS-OPEN-JFA-LUCKY-PALACE-MADURAI.jpg" alt="Luxury Dining Hall">
+                            <div class="gallery-caption">
+                                <h3>Premium Dining Hall</h3>
+                                <p>Sophisticated dining area with capacity for 240 guests</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <img src="https://i.postimg.cc/TPQPZzPV/Start-your-love-from-here-BOOKINGS-OPEN-JFA-LUCKY-PALACE-MADURAI-2.jpg" alt="Crystal Chandelier">
+                            <div class="gallery-caption">
+                                <h3>Crystal Chandelier View</h3>
+                                <p>Magnificent crystal chandeliers adding elegance to your celebration</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <img src="https://i.postimg.cc/3Nc2ZbXw/chair.jpg" alt="Elegant Seating">
+                            <div class="gallery-caption">
+                                <h3>Elegant Seating Arrangement</h3>
+                                <p>Comfortable and stylish seating for your guests</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <img src="https://i.postimg.cc/NjhgygVG/hall1.avif" alt="Luxury Lobby">
+                            <div class="gallery-caption">
+                                <h3>Luxury Reception Lobby</h3>
+                                <p>Opulent lobby area for welcoming your guests</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item" onclick="openModal(this)">
+                            <img src="https://i.postimg.cc/d0TY9gyQ/Start-your-love-from-here-BOOKINGS-OPEN-JFA-LUCKY-PALACE-MADURAI-1.jpg" alt="Golden Furniture">
+                            <div class="gallery-caption">
+                                <h3>Premium Golden Furniture</h3>
+                                <p>Luxurious golden furniture sets creating a royal atmosphere</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-indicators">
+                    <span class="gallery-indicator active"></span>
+                    <span class="gallery-indicator"></span>
+                    <span class="gallery-indicator"></span>
+                    <span class="gallery-indicator"></span>
+                    <span class="gallery-indicator"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amenities Section -->
+    <section class="amenities section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Premium Amenities</h2>
+            <div class="amenities-container">
+                <div class="amenity-card animate-left">
+                    <h3>Premium Facilities</h3>
+                    <ul>
+                        <li>13 Rooms available</li>
+                        <li>13 AC Rooms</li>
+                        <li>15,000 Square Feet Capacity</li>
+                        <li>50 Parking Spaces</li>
+                        <li>Power Backup</li>
+                        <li>240 Dining Capacity</li>
+                        <li>Lift Access to Hall</li>
+                        <li>Stage Available</li>
+                    </ul>
+                </div>
+                <div class="amenity-card animate-on-scroll">
+                    <h3>Wedding Policies</h3>
+                    <ul>
+                        <li>Flexible Cancellation Policy</li>
+                        <li>50% Payment On Booking</li>
+                        <li>50% Payment On Event Date</li>
+                        <li>Decoration Services Available</li>
+                        <li>Catering Services Included</li>
+                        <li>Non-Veg Service Allowed</li>
+                        <li>Sacred Fire Rituals Permitted</li>
+                        <li>Professional Event Coordination</li>
+                    </ul>
+                </div>
+                <div class="amenity-card animate-right">
+                    <h3>Special Services</h3>
+                    <ul>
+                        <li>Premium Wedding Venue</li>
+                        <li>Time-Based Rental</li>
+                        <li>Guest Accommodation</li>
+                        <li>Multi-Cuisine Catering</li>
+                        <li>Cooking Facilities Available</li>
+                        <li>Climate Controlled Environment</li>
+                        <li>Ground Level Access</li>
+                        <li>Professional Photography Support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Premium Pricing</h2>
+            <div class="price-box animate-scale">
+                <h3>Wedding Package Starting From</h3>
+                <div class="price-amount">₹2,50,000</div>
+                <div class="price-period">Per Day</div>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>(5.0 Excellent Reviews)</span>
+                </div>
+                <a href="javascript:void(0);" onclick="openWhatsApp()" class="btn">Check Availability</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Connect With Us</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item animate-left">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h3>Our Location</h3>
+                            <p>X52C+JHB, Melur Main Rd, Muthia Nagar, Uthangudi, Tamil Nadu 625107</p>
+                        </div>
+                    </div>
+                    <div class="contact-item animate-left">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h3>Call Us</h3>
+                            <p>+91 9080173573</p>
+                        </div>
+                    </div>
+                    <div class="contact-item animate-left">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <h3>WhatsApp</h3>
+                            <p>+91 9080173573</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-container animate-right">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3930.123456789012!2d78.12345678901234!3d9.98765432101234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwNTknMTUuNiJOIDc4wrAwNycyMS4xIkU!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h2>JFA Lucky Palace</h2>
+            <p>Where dreams become beautiful reality</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com/profile.php?id=100088934403785" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/jfa_lucky_palace" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/919080173573" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> JFA Lucky Palace. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Global variables
+        let currentSlide = 0;
+        let autoPlayInterval;
+        let isManualNavigation = false;
+
+        // Initialize everything when page loads
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hidden');
+            }, 1500);
+            
+            initializeAnimations();
+            initializeGallery();
+            initializeModal();
+        });
+
+        // WhatsApp function
+        function openWhatsApp() {
+            const phoneNumber = "9080173573";
+            const message = "🌟 Hello! I'm interested in booking JFA Lucky Palace for a wedding celebration. Please share availability and package details. ✨";
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Initialize scroll animations
+        function initializeAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, observerOptions);
+
+            const animationElements = document.querySelectorAll('.animate-on-scroll, .animate-left, .animate-right, .animate-scale');
+            animationElements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // Initialize gallery functionality
+        function initializeGallery() {
+            const track = document.getElementById('galleryTrack');
+            const indicators = document.querySelectorAll('.gallery-indicator');
+            
+            // Set up auto-play
+            startAutoPlay();
+            
+            // Pause on hover
+            track.addEventListener('mouseenter', () => {
+                track.style.animationPlayState = 'paused';
+                clearInterval(autoPlayInterval);
+            });
+            
+            // Resume on mouse leave
+            track.addEventListener('mouseleave', () => {
+                if (!isManualNavigation) {
+                    track.style.animationPlayState = 'running';
+                    startAutoPlay();
+                }
+            });
+
+            // Indicator click events
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    goToSlide(index);
+                });
+            });
+
+            // Update indicators periodically
+            setInterval(updateIndicators, 1000);
+        }
+
+        // Auto-play functionality
+        function startAutoPlay() {
+            autoPlayInterval = setInterval(() => {
+                if (!isManualNavigation) {
+                    currentSlide = (currentSlide + 1) % 5;
+                    updateIndicators();
+                }
+            }, 8000);
+        }
+
+        // Manual navigation functions
+        function nextSlide() {
+            isManualNavigation = true;
+            clearInterval(autoPlayInterval);
+            
+            const track = document.getElementById('galleryTrack');
+            track.style.animationPlayState = 'paused';
+            
+            // Get current position and move forward
+            const itemWidth = 430; // 400px + 30px margin
+            const currentTransform = getTransformValue(track);
+            
+            track.style.transform = `translateX(${currentTransform - itemWidth * 2}px)`;
+            
+            setTimeout(() => {
+                track.style.transform = '';
+                track.style.animationPlayState = 'running';
+                isManualNavigation = false;
+                startAutoPlay();
+            }, 800);
+            
+            currentSlide = (currentSlide + 1) % 5;
+            updateIndicators();
+        }
+
+        function previousSlide() {
+            isManualNavigation = true;
+            clearInterval(autoPlayInterval);
+            
+            const track = document.getElementById('galleryTrack');
+            track.style.animationPlayState = 'paused';
+            
+            // Get current position and move backward
+            const itemWidth = 430; // 400px + 30px margin
+            const currentTransform = getTransformValue(track);
+            
+            track.style.transform = `translateX(${currentTransform + itemWidth * 2}px)`;
+            
+            setTimeout(() => {
+                track.style.transform = '';
+                track.style.animationPlayState = 'running';
+                isManualNavigation = false;
+                startAutoPlay();
+            }, 800);
+            
+            currentSlide = (currentSlide - 1 + 5) % 5;
+            updateIndicators();
+        }
+
+        // Go to specific slide
+        function goToSlide(index) {
+            currentSlide = index;
+            updateIndicators();
+            
+            isManualNavigation = true;
+            clearInterval(autoPlayInterval);
+            
+            const track = document.getElementById('galleryTrack');
+            track.style.animationPlayState = 'paused';
+            
+            setTimeout(() => {
+                track.style.animationPlayState = 'running';
+                isManualNavigation = false;
+                startAutoPlay();
+            }, 1000);
+        }
+
+        // Get current transform value
+        function getTransformValue(element) {
+            const style = window.getComputedStyle(element);
+            const matrix = new DOMMatrix(style.transform);
+            return matrix.m41;
+        }
+
+        // Update indicators
+        function updateIndicators() {
+            const indicators = document.querySelectorAll('.gallery-indicator');
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+         function toggleNav() {
+        const navLinks = document.getElementById('navLinks');
+        navLinks.classList.toggle('active');
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        const navMenu = document.querySelector('.nav-menu');
+        if (!navMenu.contains(e.target)) {
+            document.getElementById('navLinks').classList.remove('active');
+        }
+    });
+
+    function openWhatsApp() {
+        const phoneNumber = "9080173573";
+        const message = "Hello! I'm interested in booking JFA Lucky Palace. Please share details.";
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+    }
+
+        // Modal functionality
+        function initializeModal() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            const closeBtn = document.querySelector('.close');
+
+            // Close modal events
+            closeBtn.addEventListener('click', closeModal);
+            
+            window.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && modal.style.display === 'block') {
+                    closeModal();
+                }
+            });
+        }
+
+        // Open modal function
+        function openModal(element) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            
+            const img = element.querySelector('img');
+            const caption = element.querySelector('.gallery-caption');
+            
+            modal.style.display = 'block';
+            modalImg.src = img.src;
+            modalCaption.querySelector('h3').textContent = caption.querySelector('h3').textContent;
+            modalCaption.querySelector('p').textContent = caption.querySelector('p').textContent;
+            
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal function
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Performance optimizations
+        function optimizePerformance() {
+            // Throttle scroll events
+            let ticking = false;
+            
+            function updateScrollEffects() {
+                // Add parallax effect for header
+                const scrolled = window.pageYOffset;
+                const header = document.querySelector('.header');
+                if (header && scrolled < window.innerHeight) {
+                    header.style.transform = `translateY(${scrolled * 0.5}px)`;
+                }
+                ticking = false;
+            }
+            
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(updateScrollEffects);
+                    ticking = true;
+                }
+            });
+        }
+
+        // Interactive hover effects
+        function addInteractiveEffects() {
+            const cards = document.querySelectorAll('.amenity-card, .price-box, .contact-item');
+            
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = (y - centerY) / 20;
+                    const rotateY = (centerX - x) / 20;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+                });
+            });
+        }
+
+        // Button loading states
+        function addLoadingStates() {
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.style.opacity = '0.7';
+                    setTimeout(() => {
+                        this.style.opacity = '1';
+                    }, 1000);
+                });
+            });
+        }
+
+        // Initialize all enhancements
+        optimizePerformance();
+        addInteractiveEffects();
+        addLoadingStates();
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

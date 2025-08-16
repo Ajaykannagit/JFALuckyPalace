@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Packages & Services - JFA Lucky Palace | Madurai</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a2332;
+            --secondary: #d4af37;
+            --accent: #8b4513;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --white: #ffffff;
+            --cream: #faf8f5;
+            --gold: #ffd700;
+            --navy: #0f1419;
+            --shadow: 0 8px 25px rgba(0,0,0,0.1);
+            --shadow-light: 0 4px 15px rgba(0,0,0,0.08);
+            --shadow-dark: 0 10px 30px rgba(0,0,0,0.3);
+            --gradient-primary: linear-gradient(135deg, var(--primary), var(--navy));
+            --gradient-gold: linear-gradient(135deg, var(--gold), var(--secondary));
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            background: var(--cream);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading Screen */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .loading.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loading-content {
+            text-align: center;
+            color: white;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid var(--gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        .loading-text {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Particle Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .back-home {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--gradient-gold);
+    color: var(--dark);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    z-index: 999;
+    box-shadow: var(--shadow-dark);
+    transition: all 0.3s ease;
+}
+
+.back-home:hover {
+    transform: scale(1.1);
+}
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 35, 50, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .navbar.scrolled {
+            background: rgba(26, 35, 50, 0.98);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu a:hover {
+            color: var(--gold);
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--gold);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Header */
+        .header {
+            position: relative;
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.3) 100%);
+            z-index: 1;
+        }
+
+        .header-content {
+            max-width: 800px;
+            z-index: 5;
+            position: relative;
+            animation: fadeInUp 1.5s ease-out;
+            padding: 0 20px;
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(60px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .header-content h1 {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.8);
+            font-weight: 700;
+            letter-spacing: 3px;
+            line-height: 1.2;
+        }
+
+        .header-content p {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gradient-gold);
+            color: var(--dark);
+            padding: 18px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid transparent;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4);
+            border-color: var(--gold);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+            font-size: 3rem;
+            color: var(--primary);
+            position: relative;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--gradient-gold);
+            margin: 25px auto;
+            border-radius: 2px;
+        }
+
+        /* Package Calculator Section */
+        .calculator-section {
+            background: var(--white);
+            position: relative;
+        }
+
+        .calculator-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .calculator-form {
+            background: var(--light);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-dark);
+            border: 2px solid var(--gold);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            border: 2px solid #eee;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .checkbox-item:hover {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--gold);
+        }
+
+        .checkbox-item.checked {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .price-display {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            position: sticky;
+            top: 100px;
+        }
+
+        .price-display h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+
+        .price-breakdown {
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .total-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Blog Section */
+        .blog-section {
+            background: var(--light);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .blog-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .blog-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.3));
+        }
+
+        .blog-content {
+            padding: 30px;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .blog-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .blog-excerpt {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .read-more {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: var(--secondary);
+        }
+
+        /* Vendor Partners Section */
+        .vendors-section {
+            background: var(--primary);
+            color: white;
+            position: relative;
+        }
+
+        .vendors-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="rgba(212,175,55,0.1)"/></svg>');
+            background-size: 50px 50px;
+        }
+
+        .vendors-section .section-title {
+            color: var(--gold);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        .vendors-section .section-title::after {
+            background: var(--gradient-gold);
+        }
+
+        .vendor-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .vendor-category {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .vendor-category:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--gold);
+        }
+
+        .vendor-category h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .vendor-list {
+            list-style: none;
+        }
+
+        .vendor-item {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .vendor-item:last-child {
+            border-bottom: none;
+        }
+
+        .vendor-item:hover {
+            transform: translateX(10px);
+            color: var(--gold);
+        }
+
+        .vendor-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .vendor-rating {
+            color: var(--gold);
+            font-size: 0.9rem;
+        }
+
+        .vendor-contact {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        /* Decor Themes Section */
+        .themes-section {
+            background: var(--white);
+        }
+
+        .themes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .theme-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 400px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .theme-card:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .theme-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .theme-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8));
+            display: flex;
+            align-items: flex-end;
+            padding: 30px;
+            color: white;
+        }
+
+        .theme-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--gold);
+        }
+
+        .theme-info p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .theme-price {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--gradient-gold);
+            color: var(--dark);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        /* Press & Media Section */
+        .press-section {
+            background: var(--light);
+        }
+
+        .press-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .press-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            border-left: 4px solid var(--gold);
+        }
+
+        .press-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-dark);
+        }
+
+        .press-source {
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .press-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .press-excerpt {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .press-date {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        .awards-section {
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+            margin-top: 60px;
+        }
+
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .award-item {
+            text-align: center;
+        }
+
+        .award-icon {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .award-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--gold);
+        }
+
+        .award-year {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: rgba(26, 35, 50, 0.98);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 30px 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .header-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .calculator-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .price-display {
+                position: static;
+            }
+
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+
+            .themes-grid,
+            .blog-grid,
+            .press-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .vendor-categories {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll Animation Classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease-out;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 1s ease-out;
+        }
+
+        .animate-left.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animate-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 1s ease-out;
+        }
+
+        .animate-right.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animate-scale {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 1s ease-out;
+        }
+
+        .animate-scale.animated {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Loading Premium Services...</div>
+        </div>
+    </div>
+
+    
+
+    <!-- Particle Background -->
+    <div class="particles" id="particles"></div>
+
+     <a href="JFA_Lucky_Palace.html" class="logo">
+    <i class="fas fa-crown" style="margin-right: 10px;"></i>
+    JFA Lucky Palace
+</a>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="JFA_Lucky_Palace.html" class="logo">JFA Lucky Palace</a>
+            <ul class="nav-menu">
+                <li><a href="#calculator">Package Calculator</a></li>
+                <li><a href="#blog">Blog & Tips</a></li>
+                <li><a href="#vendors">Vendor Partners</a></li>
+                <li><a href="#themes">Decor Themes</a></li>
+                <li><a href="#press">Press & Media</a></li>
+                <li><a href="javascript:void(0)" onclick="openWhatsApp()">Book Now</a></li>
+            </ul>
+            <div class="nav-toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1>Custom Packages & Services</h1>
+            <p>Design your perfect event with our comprehensive planning tools</p>
+            <a href="#calculator" class="btn">Start Planning</a>
+        </div>
+    </header>
+
+    <!-- Package Calculator Section -->
+    <section id="calculator" class="calculator-section section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Custom Package Calculator</h2>
+            <div class="calculator-container">
+                <div class="calculator-form animate-left">
+                    <h3 style="margin-bottom: 30px; color: var(--primary); font-size: 1.8rem;">Plan Your Perfect Event</h3>
+                    
+                    <div class="form-group">
+                        <label for="eventType">Event Type</label>
+                        <select id="eventType" class="form-control" onchange="calculatePrice()">
+                            <option value="">Select Event Type</option>
+                            <option value="wedding" data-price="250000">Wedding Ceremony</option>
+                            <option value="engagement" data-price="150000">Engagement</option>
+                            <option value="birthday" data-price="75000">Birthday Party</option>
+                            <option value="corporate" data-price="120000">Corporate Event</option>
+                            <option value="baby-shower" data-price="60000">Baby Shower</option>
+                            <option value="college" data-price="80000">College Function</option>
+                            <option value="religious" data-price="100000">Religious Event</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="guestCount">Number of Guests</label>
+                        <input type="range" id="guestCount" class="form-control" min="50" max="500" value="200" oninput="updateGuestCount(); calculatePrice()">
+                        <div style="text-align: center; margin-top: 10px; font-weight: 600; color: var(--gold);">
+                            <span id="guestDisplay">200</span> Guests
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Food Options</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item" onclick="toggleCheckbox(this, 'veg-menu', 15000)">
+                                <input type="checkbox" id="veg-menu">
+                                <label for="veg-menu">Vegetarian Menu (+₹15,000)</label>
+                            </div>
+                            <div class="checkbox-item" onclick="toggleCheckbox(this, 'non-veg-menu', 25000)">
+                                <input type="checkbox" id="non-veg-menu">
+                                <label for="non-veg-menu">Non-Vegetarian Menu (+₹25,000)</label>
+                            </div>
+                            <div class="checkbox-item" onclick="toggleCheckbox(this, 'live-counter', 20000)">
+                                <input type="checkbox" id="live-counter">
+                                <label for="live-counter">Live Food Counter (+₹20,000)</label>
+                            </div>
+                            <div class="checkbox-item" onclick="toggleCheckbox(this, 'dessert-station', 12000)">
+                                <input type="checkbox" id="dessert-station">
+                                <label for="dessert-station">Dessert Station (+₹12,000)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Decor Themes</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item" onclick="toggleCheckbox(this, 'royal-theme', 50000)">
+                                <input type="checkbox" id="royal-theme">
+                                <label for="royal-theme">Royal Theme (+₹50,000)</label>
+                            </div>
+                            <div class="checkbox-item" onclick="toggleCheckbox(this, 'floral-theme', 35000)">
+                                <input type="checkbox" id="floral-theme">
+                                <label for="floral-theme">Floral Theme (+₹35,000)</label>
+                            </div>
+                            <div class="checkbox-item" onclick="toggleCheckbox(this, 'rustic-theme', 30000)">
+                                <input type="checkbox" id="rustic-theme">
+                                <label for="rustic-theme">Rustic Theme (+₹30,000)</label>
+                            </div>
+                            <div class="checkbox-item" onclick="toggleCheckbox(this, 'minimal-theme', 20000)">
+                                <input type="checkbox" id="minimal-theme">
+                                <label for="minimal-theme">Minimal Theme (+₹20,000)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Audio/Visual Needs</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item" onclick="toggleCheckbox(this, 'sound-system', 15000)">
+                                <input type="checkbox" id="sound-system">
+                                <label for="sound-system">Premium Sound System (+₹15,000)</label>
+                            </div>
+                            <div class="checkbox-item" onclick="toggleCheckbox(this, 'lighting', 25000)">
+                                <input type="checkbox" id="lighting">
+                                <label for="lighting">Professional Lighting (+₹25,000)</label>
+                            </div>
+                            <div class="checkbox-item" onclick="toggleCheckbox(this, 'photography', 40000)">
+                                <input type="checkbox" id="photography">
+                                <label for="photography">Photography Package (+₹40,000)</label>
+                            </div>
+                            <div class="checkbox-item" onclick="toggleCheckbox(this, 'videography', 35000)">
+                                <input type="checkbox" id="videography">
+                                <label for="videography">Videography Package (+₹35,000)</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="price-display animate-right">
+                    <h3>Your Custom Package</h3>
+                    <div class="price-breakdown" id="priceBreakdown">
+                        <div class="price-item">
+                            <span>Base Package:</span>
+                            <span id="basePrice">₹0</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Guest Count Adjustment:</span>
+                            <span id="guestPrice">₹0</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Add-ons:</span>
+                            <span id="addonsPrice">₹0</span>
+                        </div>
+                    </div>
+                    <div class="total-price" id="totalPrice">₹0</div>
+                    <p style="margin-bottom: 30px; opacity: 0.9;">*Prices are estimates and may vary based on specific requirements</p>
+                    <a href="javascript:void(0)" onclick="openWhatsAppWithQuote()" class="btn">Get Detailed Quote</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog-section section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Event Planning Blog & Tips</h2>
+            <div class="blog-grid">
+                <article class="blog-card animate-on-scroll">
+                    <div class="blog-image" style="background-image: url('https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg');"></div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> Dec 15, 2024</span>
+                            <span><i class="fas fa-user"></i> Event Expert</span>
+                        </div>
+                        <h3 class="blog-title">10 Essential Wedding Planning Tips for 2025</h3>
+                        <p class="blog-excerpt">Discover the latest trends and timeless advice for planning your perfect wedding celebration in the new year.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card animate-on-scroll">
+                    <div class="blog-image" style="background-image: url('https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg');"></div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> Dec 12, 2024</span>
+                            <span><i class="fas fa-user"></i> Decor Specialist</span>
+                        </div>
+                        <h3 class="blog-title">Trending Decor Themes for Modern Weddings</h3>
+                        <p class="blog-excerpt">Explore the most popular decoration styles that are making waves in the wedding industry this season.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card animate-on-scroll">
+                    <div class="blog-image" style="background-image: url('https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg');"></div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> Dec 10, 2024</span>
+                            <span><i class="fas fa-user"></i> Venue Manager</span>
+                        </div>
+                        <h3 class="blog-title">Choosing the Perfect Venue: A Complete Guide</h3>
+                        <p class="blog-excerpt">Learn what to look for when selecting a wedding venue that matches your vision and budget perfectly.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card animate-on-scroll">
+                    <div class="blog-image" style="background-image: url('https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg');"></div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> Dec 8, 2024</span>
+                            <span><i class="fas fa-user"></i> Catering Expert</span>
+                        </div>
+                        <h3 class="blog-title">Creating Memorable Dining Experiences</h3>
+                        <p class="blog-excerpt">Tips for designing a menu that delights your guests and creates lasting memories of your special day.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card animate-on-scroll">
+                    <div class="blog-image" style="background-image: url('https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg');"></div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> Dec 5, 2024</span>
+                            <span><i class="fas fa-user"></i> Local Expert</span>
+                        </div>
+                        <h3 class="blog-title">Best Local Vendors in Madurai</h3>
+                        <p class="blog-excerpt">Discover trusted local vendors who can help make your event extraordinary with their expertise and services.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+
+                <article class="blog-card animate-on-scroll">
+                    <div class="blog-image" style="background-image: url('https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg');"></div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> Dec 3, 2024</span>
+                            <span><i class="fas fa-user"></i> Budget Expert</span>
+                        </div>
+                        <h3 class="blog-title">Smart Budgeting for Your Dream Wedding</h3>
+                        <p class="blog-excerpt">Learn how to allocate your wedding budget effectively to get the most value for your investment.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vendor Partners Section -->
+    <section id="vendors" class="vendors-section section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Trusted Vendor Partners</h2>
+            <div class="vendor-categories">
+                <div class="vendor-category animate-left">
+                    <h3><i class="fas fa-utensils"></i> Premium Caterers</h3>
+                    <ul class="vendor-list">
+                        <li class="vendor-item">
+                            <div class="vendor-name">Royal Feast Catering</div>
+                            <div class="vendor-rating">★★★★★ (4.9/5)</div>
+                            <div class="vendor-contact">+91 98765 43210</div>
+                        </li>
+                        <li class="vendor-item">
+                            <div class="vendor-name">Madurai Delights</div>
+                            <div class="vendor-rating">★★★★★ (4.8/5)</div>
+                            <div class="vendor-contact">+91 98765 43211</div>
+                        </li>
+                        <li class="vendor-item">
+                            <div class="vendor-name">Traditional Tastes</div>
+                            <div class="vendor-rating">★★★★☆ (4.7/5)</div>
+                            <div class="vendor-contact">+91 98765 43212</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="vendor-category animate-on-scroll">
+                    <h3><i class="fas fa-palette"></i> Expert Decorators</h3>
+                    <ul class="vendor-list">
+                        <li class="vendor-item">
+                            <div class="vendor-name">Elegant Events Decor</div>
+                            <div class="vendor-rating">★★★★★ (4.9/5)</div>
+                            <div class="vendor-contact">+91 98765 43213</div>
+                        </li>
+                        <li class="vendor-item">
+                            <div class="vendor-name">Floral Fantasy</div>
+                            <div class="vendor-rating">★★★★★ (4.8/5)</div>
+                            <div class="vendor-contact">+91 98765 43214</div>
+                        </li>
+                        <li class="vendor-item">
+                            <div class="vendor-name">Royal Decorations</div>
+                            <div class="vendor-rating">★★★★☆ (4.6/5)</div>
+                            <div class="vendor-contact">+91 98765 43215</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="vendor-category animate-right">
+                    <h3><i class="fas fa-camera"></i> Professional Photographers</h3>
+                    <ul class="vendor-list">
+                        <li class="vendor-item">
+                            <div class="vendor-name">Capture Moments Studio</div>
+                            <div class="vendor-rating">★★★★★ (4.9/5)</div>
+                            <div class="vendor-contact">+91 98765 43216</div>
+                        </li>
+                        <li class="vendor-item">
+                            <div class="vendor-name">Wedding Memories</div>
+                            <div class="vendor-rating">★★★★★ (4.8/5)</div>
+                            <div class="vendor-contact">+91 98765 43217</div>
+                        </li>
+                        <li class="vendor-item">
+                            <div class="vendor-name">Perfect Shots</div>
+                            <div class="vendor-rating">★★★★☆ (4.7/5)</div>
+                            <div class="vendor-contact">+91 98765 43218</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="vendor-category animate-left">
+                    <h3><i class="fas fa-music"></i> DJs & Entertainment</h3>
+                    <ul class="vendor-list">
+                        <li class="vendor-item">
+                            <div class="vendor-name">Beat Masters DJ</div>
+                            <div class="vendor-rating">★★★★★ (4.8/5)</div>
+                            <div class="vendor-contact">+91 98765 43219</div>
+                        </li>
+                        <li class="vendor-item">
+                            <div class="vendor-name">Rhythm & Beats</div>
+                            <div class="vendor-rating">★★★★☆ (4.7/5)</div>
+                            <div class="vendor-contact">+91 98765 43220</div>
+                        </li>
+                        <li class="vendor-item">
+                            <div class="vendor-name">Live Band Express</div>
+                            <div class="vendor-rating">★★★★☆ (4.6/5)</div>
+                            <div class="vendor-contact">+91 98765 43221</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="vendor-category animate-on-scroll">
+                    <h3><i class="fas fa-microphone"></i> Master of Ceremonies</h3>
+                    <ul class="vendor-list">
+                        <li class="vendor-item">
+                            <div class="vendor-name">Elite MC Services</div>
+                            <div class="vendor-rating">★★★★★ (4.9/5)</div>
+                            <div class="vendor-contact">+91 98765 43222</div>
+                        </li>
+                        <li class="vendor-item">
+                            <div class="vendor-name">Professional Hosts</div>
+                            <div class="vendor-rating">★★★★☆ (4.7/5)</div>
+                            <div class="vendor-contact">+91 98765 43223</div>
+                        </li>
+                        <li class="vendor-item">
+                            <div class="vendor-name">Event Anchors</div>
+                            <div class="vendor-rating">★★★★☆ (4.6/5)</div>
+                            <div class="vendor-contact">+91 98765 43224</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="vendor-category animate-right">
+                    <h3><i class="fas fa-car"></i> Transportation</h3>
+                    <ul class="vendor-list">
+                        <li class="vendor-item">
+                            <div class="vendor-name">Luxury Car Rentals</div>
+                            <div class="vendor-rating">★★★★★ (4.8/5)</div>
+                            <div class="vendor-contact">+91 98765 43225</div>
+                        </li>
+                        <li class="vendor-item">
+                            <div class="vendor-name">Wedding Wheels</div>
+                            <div class="vendor-rating">★★★★☆ (4.7/5)</div>
+                            <div class="vendor-contact">+91 98765 43226</div>
+                        </li>
+                        <li class="vendor-item">
+                            <div class="vendor-name">Royal Rides</div>
+                            <div class="vendor-rating">★★★★☆ (4.6/5)</div>
+                            <div class="vendor-contact">+91 98765 43227</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Decor Themes Section -->
+    <section id="themes" class="themes-section section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Stunning Decor Themes</h2>
+            <div class="themes-grid">
+                <div class="theme-card animate-on-scroll" onclick="selectTheme('Royal Theme')">
+                    <div class="theme-image" style="background-image: url('https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg');">
+                        <div class="theme-price">From ₹50,000</div>
+                        <div class="theme-overlay">
+                            <div class="theme-info">
+                                <h3>Royal Theme</h3>
+                                <p>Majestic golden decor with premium fabrics and crystal chandeliers</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="theme-card animate-on-scroll" onclick="selectTheme('Floral Paradise')">
+                    <div class="theme-image" style="background-image: url('https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg');">
+                        <div class="theme-price">From ₹35,000</div>
+                        <div class="theme-overlay">
+                            <div class="theme-info">
+                                <h3>Floral Paradise</h3>
+                                <p>Fresh flowers and natural elements creating a garden-like atmosphere</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="theme-card animate-on-scroll" onclick="selectTheme('Rustic Elegance')">
+                    <div class="theme-image" style="background-image: url('https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg');">
+                        <div class="theme-price">From ₹30,000</div>
+                        <div class="theme-overlay">
+                            <div class="theme-info">
+                                <h3>Rustic Elegance</h3>
+                                <p>Vintage charm with wooden elements and warm lighting</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="theme-card animate-on-scroll" onclick="selectTheme('Minimal Chic')">
+                    <div class="theme-image" style="background-image: url('https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg');">
+                        <div class="theme-price">From ₹20,000</div>
+                        <div class="theme-overlay">
+                            <div class="theme-info">
+                                <h3>Minimal Chic</h3>
+                                <p>Clean lines and sophisticated simplicity with modern touches</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="theme-card animate-on-scroll" onclick="selectTheme('Traditional South Indian')">
+                    <div class="theme-image" style="background-image: url('https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg');">
+                        <div class="theme-price">From ₹40,000</div>
+                        <div class="theme-overlay">
+                            <div class="theme-info">
+                                <h3>Traditional South Indian</h3>
+                                <p>Rich cultural elements with banana leaves and temple-inspired decor</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="theme-card animate-on-scroll" onclick="selectTheme('Modern Glamour')">
+                    <div class="theme-image" style="background-image: url('https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg');">
+                        <div class="theme-price">From ₹45,000</div>
+                        <div class="theme-overlay">
+                            <div class="theme-info">
+                                <h3>Modern Glamour</h3>
+                                <p>Contemporary design with metallic accents and LED lighting</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Press & Media Section -->
+    <section id="press" class="press-section section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Press & Media Coverage</h2>
+            <div class="press-grid">
+                <article class="press-card animate-left">
+                    <div class="press-source">The Hindu - Madurai Edition</div>
+                    <h3 class="press-title">"JFA Lucky Palace: Setting New Standards in Wedding Venues"</h3>
+                    <p class="press-excerpt">The venue has revolutionized wedding celebrations in Madurai with its state-of-the-art facilities and exceptional service quality, making it the preferred choice for discerning families.</p>
+                    <div class="press-date">Published: November 15, 2024</div>
+                </article>
+
+                <article class="press-card animate-on-scroll">
+                    <div class="press-source">Dinamalar</div>
+                    <h3 class="press-title">"மதுரையின் சிறந்த திருமண மண்டபம்"</h3>
+                    <p class="press-excerpt">JFA Lucky Palace has become the talk of the town for its magnificent architecture and world-class amenities, hosting some of the most memorable celebrations in the region.</p>
+                    <div class="press-date">Published: October 28, 2024</div>
+                </article>
+
+                <article class="press-card animate-right">
+                    <div class="press-source">Wedding Sutra Magazine</div>
+                    <h3 class="press-title">"Top 10 Wedding Venues in Tamil Nadu"</h3>
+                    <p class="press-excerpt">Featured among the elite wedding destinations, JFA Lucky Palace stands out for its perfect blend of traditional charm and modern luxury, offering couples their dream wedding experience.</p>
+                    <div class="press-date">Published: September 20, 2024</div>
+                </article>
+
+                <article class="press-card animate-left">
+                    <div class="press-source">Event Management Today</div>
+                    <h3 class="press-title">"Innovation in Event Spaces: A Case Study"</h3>
+                    <p class="press-excerpt">The venue's innovative approach to space utilization and customer service has set new benchmarks in the industry, earning recognition from event management professionals.</p>
+                    <div class="press-date">Published: August 12, 2024</div>
+                </article>
+
+                <article class="press-card animate-on-scroll">
+                    <div class="press-source">Madurai Mirror</div>
+                    <h3 class="press-title">"Local Business Excellence Award Winner"</h3>
+                    <p class="press-excerpt">Recognized for outstanding contribution to the local economy and tourism sector, JFA Lucky Palace continues to attract visitors from across South India.</p>
+                    <div class="press-date">Published: July 5, 2024</div>
+                </article>
+
+                <article class="press-card animate-right">
+                    <div class="press-source">Venue Today</div>
+                    <h3 class="press-title">"Sustainable Event Practices in Modern Venues"</h3>
+                    <p class="press-excerpt">Highlighting the venue's commitment to environmental responsibility while maintaining luxury standards, setting an example for the industry.</p>
+                    <div class="press-date">Published: June 18, 2024</div>
+                </article>
+            </div>
+
+            <div class="awards-section">
+                <h2 style="color: var(--gold); margin-bottom: 20px;">Awards & Recognition</h2>
+                <p style="opacity: 0.9; margin-bottom: 40px;">Celebrating excellence in hospitality and event management</p>
+                <div class="awards-grid">
+                    <div class="award-item">
+                        <div class="award-icon"><i class="fas fa-trophy"></i></div>
+                        <div class="award-title">Best Wedding Venue</div>
+                        <div class="award-year">Tamil Nadu - 2024</div>
+                    </div>
+                    <div class="award-item">
+                        <div class="award-icon"><i class="fas fa-star"></i></div>
+                        <div class="award-title">Excellence in Service</div>
+                        <div class="award-year">Madurai Chamber - 2024</div>
+                    </div>
+                    <div class="award-item">
+                        <div class="award-icon"><i class="fas fa-medal"></i></div>
+                        <div class="award-title">Customer Choice Award</div>
+                        <div class="award-year">Event Industry - 2023</div>
+                    </div>
+                    <div class="award-item">
+                        <div class="award-icon"><i class="fas fa-crown"></i></div>
+                        <div class="award-title">Premium Venue Status</div>
+                        <div class="award-year">Hospitality Board - 2023</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Global Variables
+        let currentModal = null;
+        let selectedAddons = new Set();
+        let basePrice = 0;
+        let guestMultiplier = 1;
+
+        // Initialize everything when page loads
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hidden');
+            }, 2000);
+            
+            initializeParticles();
+            initializeAnimations();
+            initializeNavbar();
+            calculatePrice();
+        });
+
+        // WhatsApp Functions
+        function openWhatsApp(inquiry = 'General Inquiry') {
+            const phoneNumber = "919080173573";
+            const message = `🌟 Hello! I'm interested in ${inquiry} at JFA Lucky Palace. Please share more details about availability, pricing, and booking process. ✨`;
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function openWhatsAppWithQuote() {
+            const eventType = document.getElementById('eventType').selectedOptions[0]?.text || 'Custom Event';
+            const guestCount = document.getElementById('guestCount').value;
+            const totalPrice = document.getElementById('totalPrice').textContent;
+            
+            const selectedServices = Array.from(selectedAddons).join(', ');
+            
+            const message = `🎉 Custom Package Quote Request
+
+Event Type: ${eventType}
+Guest Count: ${guestCount}
+Selected Services: ${selectedServices || 'Basic Package'}
+Estimated Total: ${totalPrice}
+
+Please provide a detailed quote and availability for this package. Thank you! ✨`;
+            
+            const phoneNumber = "919080173573";
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Particle Animation
+        function initializeParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                createParticle(particlesContainer);
+            }
+        }
+
+        function createParticle(container) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const size = Math.random() * 4 + 2;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            
+            container.appendChild(particle);
+
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                    createParticle(container);
+                }
+            }, 8000);
+        }
+
+        // Scroll Animations
+        function initializeAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, observerOptions);
+
+            const animationElements = document.querySelectorAll('.animate-on-scroll, .animate-left, .animate-right, .animate-scale');
+            animationElements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // Navbar Functionality
+        function initializeNavbar() {
+            const navbar = document.getElementById('navbar');
+            const navToggle = document.getElementById('nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+
+            // Scroll effect
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile menu toggle
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Calculator Functions
+        function updateGuestCount() {
+            const guestCount = document.getElementById('guestCount').value;
+            document.getElementById('guestDisplay').textContent = guestCount;
+            
+            // Calculate guest multiplier (base is 200 guests)
+            guestMultiplier = guestCount / 200;
+        }
+
+        function toggleCheckbox(element, id, price) {
+            const checkbox = element.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+            
+            element.classList.toggle('checked', checkbox.checked);
+            
+            if (checkbox.checked) {
+                selectedAddons.add(`${element.querySelector('label').textContent} (₹${price.toLocaleString()})`);
+            } else {
+                selectedAddons.delete(`${element.querySelector('label').textContent} (₹${price.toLocaleString()})`);
+            }
+            
+            calculatePrice();
+        }
+
+        function calculatePrice() {
+            const eventTypeSelect = document.getElementById('eventType');
+            const selectedOption = eventTypeSelect.selectedOptions[0];
+            
+            if (selectedOption) {
+                basePrice = parseInt(selectedOption.dataset.price) || 0;
+            } else {
+                basePrice = 0;
+            }
+            
+            // Calculate guest adjustment
+            const guestAdjustment = Math.round(basePrice * (guestMultiplier - 1));
+            
+            // Calculate addons
+            let addonsTotal = 0;
+            document.querySelectorAll('.checkbox-item.checked').forEach(item => {
+                const label = item.querySelector('label').textContent;
+                const priceMatch = label.match(/₹([\d,]+)/);
+                if (priceMatch) {
+                    addonsTotal += parseInt(priceMatch[1].replace(/,/g, ''));
+                }
+            });
+            
+            // Apply guest multiplier to addons
+            addonsTotal = Math.round(addonsTotal * guestMultiplier);
+            
+            const total = basePrice + guestAdjustment + addonsTotal;
+            
+            // Update display
+            document.getElementById('basePrice').textContent = `₹${basePrice.toLocaleString()}`;
+            document.getElementById('guestPrice').textContent = `₹${guestAdjustment.toLocaleString()}`;
+            document.getElementById('addonsPrice').textContent = `₹${addonsTotal.toLocaleString()}`;
+            document.getElementById('totalPrice').textContent = `₹${total.toLocaleString()}`;
+        }
+
+        // Theme Selection
+        function selectTheme(themeName) {
+            alert(`You've selected: ${themeName}\n\nThis theme will be added to your package. Contact us for detailed customization options!`);
+            openWhatsApp(`${themeName} Decoration Package`);
+        }
+
+        // Performance optimization for scroll events
+        let ticking = false;
+        function updateScrollEffects() {
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateScrollEffects);
+                ticking = true;
+            }
+        });
+    </script>
+</body>
+</html>
